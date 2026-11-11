@@ -38,11 +38,21 @@ public class Player : MonoBehaviour
             coyoteTime += Time.deltaTime;
         }
 
-        if (inputJump.action.WasPerformedThisFrame() && (isGrounded || coyoteTime<=coyoteTimeLimit))
+        if (isGrounded)
+        {
+            coyoteTime = coyoteTimeLimit;
+        }
+        else
+        {
+            coyoteTime -= Time.deltaTime;
+        }
+
+        if (inputJump.action.WasPerformedThisFrame() && coyoteTime > 0)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            myAnimator.SetBool("Jump", true);
             isGrounded = false;
-            myAnimator.SetBool("Jump",true);
+            coyoteTime = 0;
         }
     }
 
@@ -53,18 +63,21 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") &&
+        rb.linearVelocity.y <= 0.1f)
         {
-            isGrounded = true;
             myAnimator.SetBool("Jump", false);
+            isGrounded = true;
         }
+        
+           
+       
     }
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
-            coyoteTime = 0;
         }
     }
 }
