@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public bool isGrounded;
     public Vector2 movement;
     public Animator myAnimator;
+    public float coyoteTime;
+    public float coyoteTimeLimit = 0.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,8 +33,12 @@ public class Player : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);
         }
+        if (coyoteTime <= coyoteTimeLimit)
+        {
+            coyoteTime += Time.deltaTime;
+        }
 
-        if (inputJump.action.WasPerformedThisFrame() && isGrounded)
+        if (inputJump.action.WasPerformedThisFrame() && (isGrounded || coyoteTime<=coyoteTimeLimit))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
@@ -58,6 +64,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+            coyoteTime = 0;
         }
     }
 }
