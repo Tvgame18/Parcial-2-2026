@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8272a8ad204e9b439e6c4336f5cba5f, type: 3}
   m_Name: Remi
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  speed: 5
+  speed: 6
   jumpForce: 7
   prefab: {fileID: 7235956237455266385, guid: 1478e56e0cc1e0d448ed69caeb87b446, type: 3}

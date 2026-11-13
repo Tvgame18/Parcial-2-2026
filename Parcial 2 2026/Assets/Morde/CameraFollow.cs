@@ -8,6 +8,7 @@ public class CameraFollow : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void LateUpdate()
     {
+        if (target == null) return;
         transform.position = Vector3.Lerp(transform.position, target.position + offset, speed* Time.deltaTime);
     }
 }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: James
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   speed: 7
-  jumpForce: 5
+  jumpForce: 6
   prefab: {fileID: 923676459751655518, guid: 09b2c47ddbe64cd4cab910934c82d405, type: 3}
