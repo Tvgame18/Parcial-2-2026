@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f48f6de19296a459e7bd9c71600794, type: 3}
   m_Name: Arco2
   m_EditorClassIdentifier: Assembly-CSharp::CartaData
-  tipo: 0
-  potencia: 1
-  material: {fileID: 0}
+  tipo: 1
+  potencia: 2
+  material: {fileID: 2100000, guid: 2f44d6534db96d64281d7ef7f2a9ed28, type: 2}

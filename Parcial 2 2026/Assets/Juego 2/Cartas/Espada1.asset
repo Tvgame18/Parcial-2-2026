@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CartaData
   tipo: 0
   potencia: 1
-  material: {fileID: 0}
+  material: {fileID: 2100000, guid: 60e37880c183c594fb5ec09e2f1d6b2c, type: 2}

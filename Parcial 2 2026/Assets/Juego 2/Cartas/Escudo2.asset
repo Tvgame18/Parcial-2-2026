@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f48f6de19296a459e7bd9c71600794, type: 3}
   m_Name: Escudo2
   m_EditorClassIdentifier: Assembly-CSharp::CartaData
-  tipo: 0
-  potencia: 1
-  material: {fileID: 0}
+  tipo: 2
+  potencia: 2
+  material: {fileID: 2100000, guid: e4b037b07383f68468e786b39088b2fd, type: 2}

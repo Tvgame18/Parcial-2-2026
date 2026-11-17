@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Espada2
   m_EditorClassIdentifier: Assembly-CSharp::CartaData
   tipo: 0
-  potencia: 1
-  material: {fileID: 0}
+  potencia: 2
+  material: {fileID: 2100000, guid: d3b5fece0698f034295ad1b5a6b14e56, type: 2}
