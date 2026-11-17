@@ -2,48 +2,34 @@ using UnityEngine;
 
 public class Carta : MonoBehaviour
 {
-    public TipoCarta tipo;
-    public int potencia;
+    
+    public CartaData datos;
+    
     public Renderer miRenderer;
-    public TextMesh textoCarta;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void Configurar(TipoCarta nuevoTipo, int nuevaPotencia)
+    public void Configurar(CartaData nuevaCarta)
     {
-        tipo= nuevoTipo;
-        potencia= nuevaPotencia;
+        datos = nuevaCarta;
 
         MostrarCarta(true);
     }
 
     public void MostrarCarta(bool mostrar)
     {
-        if(!mostrar)
+        if (mostrar)
         {
-            miRenderer.material.color = Color.gray;
-            if(textoCarta != null )
-            {
-                textoCarta.text = "?";
-            }
+            miRenderer.material = datos.material;
+            miRenderer.material.color = Color.white;
+
             return;
         }
+        else
+        {
+            miRenderer.material = datos.material;
+            miRenderer.material.color = Color.black;
+        }
 
-        switch (tipo)
-        {
-            case TipoCarta.Espada:
-                miRenderer.material.color = Color.red;
-                break;
-            case TipoCarta.Arco:
-                miRenderer.material.color= Color.yellow;
-                break;
-            case TipoCarta.Escudo:
-                miRenderer.material.color=Color.blue;
-                break;
-            default:
-                break;
-        }
-        if(textoCarta != null )
-        {
-            textoCarta.text = tipo + "\n" + potencia;
-        }
+
     }
 }

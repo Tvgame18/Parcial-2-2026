@@ -4,27 +4,27 @@ using UnityEngine;
 public class Mazo : MonoBehaviour
 {
     public Carta cartaPrefab;
+    public List<CartaData> cartasDisponibles;
     public List<Carta> cartas = new List<Carta>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        CrearMazo()
+        CrearMazo();
     }
 
     // Update is called once per frame
     public void CrearMazo()
     {
-        for (int tipo = 0; tipo < 3; tipo++)
+        foreach (var datos in cartasDisponibles)
         {
-            for (int potencia = 1; potencia <= 3; potencia++)
-            {
-                Carta nueva = Instantiate(cartaPrefab, transform);
+            Carta nueva = Instantiate(cartaPrefab, transform);
 
-                nueva.Configurar((TipoCarta)tipo, potencia);
-                nueva.gameObject.SetActive(false);
-                cartas.Add(nueva);
-            }
+            nueva.Configurar(datos);
+            nueva.gameObject.SetActive(false);
+            cartas.Add(nueva);
+
         }
+
 
         Mezclar();
     }
