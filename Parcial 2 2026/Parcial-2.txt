@@ -1,0 +1,47 @@
+Descripcion de scripts del juego 1
+
+Character Data:
+Almacena informacion de la velicidad, fueza de salto y los prefab de cada personaje, es el scriptable object
+
+Camera Follow:
+Tiene como target al personaje seleccionado, si no se eligio personaje se mantiene inactiva, esta completamente fija en el personaje y lo sigue de manera horizontal por todo el nivel 
+
+Platform:
+En el platform use los waypoints para marcar hasta donde se puede mover, tambien se marca la veloidad de movimiento de las plataformas y el current point funciona como puntero para saber el siguiente punto
+
+SpawnPlayer:
+Es el punto en el que aparecen el prefeb de personaje
+
+Interact:
+Es el que determina que tipo de interaccion tiene el personaje, si gano o perdio
+
+GameManager:
+El gamemanager es quien llama a los canvas de victoria y derrota y oculta el canvas de seleccion de personajes 
+
+Reset:
+resetea la escena y tambien hace que el tiempo congelado se descongele
+
+Descripcion de scripts del juego 2
+
+GameManagerCartas:
+El gamemanager del juego 2 controla basicmamente el juego entero, el robo de cartas, el jugar cartas, el llamado a los panales de victoria y derrota, el puntaje, que las cartas vuelvan al mazo y los datos de las cartas.
+No entendi muy bien para que funciona el yield, pero asumo que es esperar dicha cantidad de segundos
+
+Tablero:
+En el tablero solo estan las posiciones del jugador y el enemigo
+
+CartaData:
+Almacena la informacion de tipo de carta, potencia de carta y el material usado, es el scriptableobject
+
+Mazo:
+El mazo esta hecho para las cartas que no se usan, tambien es para recoger y dar cartas al jugador y el enemigo, tambien mezclar cada ronda
+
+Mano:
+Son las cartas que el jugador y el enemigo pueden usar, tambien tiene la parte de sacar y de agregar cartas, esta hecho para que tanto el enemigo y el jugador al final de cada turno siempre tengan 3 cartas. Tambien estan las pocisiones en las que deben mostrarse las cartas
+
+Carta:
+Este cs sirve para mostrar o ocultar las cartas, por ejemplo si el enemigo saca una carta el juego debe ocultar el reverso para que el jugador no vea lo que tiene, asu vez el jugador debe poder ver que tiene ene la mano
+
+TipoCarta:
+es un simple enumerador para dividir los tipo de cartas
+
