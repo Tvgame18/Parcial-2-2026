@@ -6,7 +6,8 @@ using TMPro;
 public class GameManagerCartas : MonoBehaviour
 {
     public static GameManagerCartas Instance;
-
+    public GameObject panelVictoria;
+    public GameObject panelDerrota;
     public Mazo mazo;
     public Jugador jugador;
     public Jugador enemigo;
@@ -163,6 +164,11 @@ public class GameManagerCartas : MonoBehaviour
         {
             jugador.puntos++;
             empiezaEnemigo = false;
+            if (jugador.puntos >= 5)
+            {
+                panelVictoria.SetActive(true);
+                Time.timeScale = 0;
+            }
             textJugador.text = "Jugador:" + jugador.puntos;
             Debug.Log("Ganó el jugador");
         }
@@ -170,6 +176,11 @@ public class GameManagerCartas : MonoBehaviour
         {
             enemigo.puntos++;
             empiezaEnemigo = true;
+            if (enemigo.puntos >= 5)
+            {
+                panelDerrota.SetActive(true);
+                Time.timeScale = 0;
+            }
             textEnemigo.text = "Enemigo:" + enemigo.puntos;
             Debug.Log("Ganó el enemigo");
         }
