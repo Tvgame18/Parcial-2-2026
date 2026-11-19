@@ -1,31 +1,63 @@
 Descripcion de scripts del juego 1
 
+Player:
+El player comienza con los inputs de moviemiento, en la misma partu tuve que poner varios if y else para poder activar la animacion del moviento
+
+Luego cree un if para el coyote time, el cual preguntaba si estaba grounded para saber si el coyote time se activaria
+
+Luego pase con otro if para hacer el input del salto y agregarle la animacion
+
+Luego exite un FixedUpdate, el cual no recuerdo que es lo que hacia, pero si no lo tengo el juego se rompe, solo puedo deducir que esta relacionado con la movilidad
+
+Luego para finalizar se creo un oncollisionstay con un if en su interior para desactivar la animacion de salto
+
 Character Data:
 Almacena informacion de la velicidad, fueza de salto y los prefab de cada personaje, es el scriptable object
 
 Camera Follow:
-Tiene como target al personaje seleccionado, si no se eligio personaje se mantiene inactiva, esta completamente fija en el personaje y lo sigue de manera horizontal por todo el nivel 
+Es un if metido en un LateUpdate que identifica si existe un target o no, una vez identifque un target la camara lo va a seguir
 
 Platform:
-En el platform use los waypoints para marcar hasta donde se puede mover, tambien se marca la veloidad de movimiento de las plataformas y el current point funciona como puntero para saber el siguiente punto
+En este se empezo con un if para identificar los waypoint y que la plataforma se mueve de uno a otro
+
+Tambien se crearon un private void OnTriggerEnter para que cuando toque una plataforma que se mueve el rb desactive el interpolate, para que la plataforma mueva al jugador
+
+El otro es un private void OnTriggerExit el cual activa el interpolate del rb al salir de las plataformas moviles
+Y se termino con un gizmo que solo se ve en el editor para poder poner los waypoint de forma comoda
 
 SpawnPlayer:
-Es el punto en el que aparecen el prefeb de personaje
+En este cs se creo el punto en el que van a aparecer los personajes y tambien le va a dar el target a la camara una vez aparesca el player
 
 Interact:
-Es el que determina que tipo de interaccion tiene el personaje, si gano o perdio
+Se creo un enumerado para considerar que es un lose y que es un win y despues se uso un if para identificar con que interactuo el player y que pantalla se llama del GameManager
 
 GameManager:
-El gamemanager es quien llama a los canvas de victoria y derrota y oculta el canvas de seleccion de personajes 
+En el GameManager tenemos los panales de derrota y victoria que se llaman si lo pide el cs de interact, tambien esta la panatalla inicial la cual esta usando unos cuantos if para identificar que persaonaje se elijio y tambien para desactivar la pantalla de seleccion una vez elegido el personaje
 
 Reset:
-resetea la escena y tambien hace que el tiempo congelado se descongele
+Una vez se pierda o gane aparece el boton de reset para resetear la escena, tambien hace que el tiempo congelado se descongele
 
 Descripcion de scripts del juego 2
 
 GameManagerCartas:
-El gamemanager del juego 2 controla basicmamente el juego entero, el robo de cartas, el jugar cartas, el llamado a los panales de victoria y derrota, el puntaje, que las cartas vuelvan al mazo y los datos de las cartas.
-No entendi muy bien para que funciona el yield, pero asumo que es esperar dicha cantidad de segundos
+Se inicia la ronda con if que sirve para que el jugador y el enemigo rober cartas si es que no tienen 3 cartas en la mano
+
+Primero el if prgunta si se puede jugar, si no se puede va a hacer un loop hasta que se pueda, luego el otro if esta para la accion del jugador cuando es su turno que es apretar el clickizquierdo sobre la carta para tirarla en la mesa, eso activa un ray cast para que la carta vaya a donde debe
+
+Luego viene el void de inicio de ronda que es para identificar a quien le toca el if del empieza enemigo solo se activa si gana una ronda, si no el siguiente if hace que la primer ronda siempre gane el jugador
+
+Luego tenemos al enemigo si juega primero, se usa un yield return, no tengo idea de que es, pero puedo asumir que sirbve para que el rival espero unos pocos segundos antes de hacer su jugada, lo que sigue es que el enemigo juega una carta y esta se revela al jugador
+
+El siguiente es un if que pregunta si el jugador puede jugar y un if que identifica si el jugador ya jugo una carta
+Luego pasamos a la ronda, perimero se juega la carta del jugador, luego puden ocurrir un if si es que el enemigo habia jugando antes o un else si le toca al enemigo depsues del jugador
+
+Luego se compara las cartas y el ganador obtiene un punto, el primer if funcion para el juagdor, si el gana este obtiene un punto si llega a 5 aparece la pantalla de victoria, luego viene un else if que es si el enemigo gana, este suma un ponto y si llega a 5 se activa la pantalla de derrota
+
+Luego con un yieldreturn se espera un momento antes de devolver las cartas al mazo, para casi instantaneo robar unas cartas nuevas
+
+Luego viene la comparacion de cartas, que esta funciona de dos maneras primero se compara la potencia, si ambas cartas son del mismo tipo va a ganar quien tenga mas potencia, luego viene la comparacion por tipos y que le gana a que, espadas le gana a escudos, arcos le gana a espadas y escudos le gana a arcos
+
+Luego se creo la parte para que la carta tenga movimiento, se hizo uso de un while para que las cartas llegen al punto de llegada en un tiempo destacado como duracionMovimiento
 
 Tablero:
 En el tablero solo estan las posiciones del jugador y el enemigo
@@ -34,14 +66,30 @@ CartaData:
 Almacena la informacion de tipo de carta, potencia de carta y el material usado, es el scriptableobject
 
 Mazo:
-El mazo esta hecho para las cartas que no se usan, tambien es para recoger y dar cartas al jugador y el enemigo, tambien mezclar cada ronda
+Primero se creo un foreach para crear el mazo y asi ver todas las cartas disponibles para el juego
+
+Luego para la accion de mezclar las cartas se creo un for con un randomizador, no entiendo la cuenta, ni el porque se le llama carta auxiliar
+
+Luego se creo la accion de robar carta que se hizo con un if que se activa en el momento en que la ronda termine y el jugador y enemigo tienen menos de 3 cartas en la mano
+
+Las cartas jugadas vuelven al mazo y el ciclo empieza de nuevo
 
 Mano:
-Son las cartas que el jugador y el enemigo pueden usar, tambien tiene la parte de sacar y de agregar cartas, esta hecho para que tanto el enemigo y el jugador al final de cada turno siempre tengan 3 cartas. Tambien estan las pocisiones en las que deben mostrarse las cartas
+Primero agrega una carta si el jugador o enemigo tienen menos de 3 cartas
+
+Luego quita una carta cuando el jugador hace click sobre ella
+
+Y organiza las cartas en la mano en dicho angulo, uno nunca va a llegar a tener menos de 2 cartas, pero cuando el jugador o el rival tiran una carta y se quedan con 2 la pociosion cambia, para eso funciona el if, tambien vuelve a cambiar el angulo cuando se agrega otra carta a la mano
 
 Carta:
-Este cs sirve para mostrar o ocultar las cartas, por ejemplo si el enemigo saca una carta el juego debe ocultar el reverso para que el jugador no vea lo que tiene, asu vez el jugador debe poder ver que tiene ene la mano
+Tengo in if que deberia mostrar la parte de atras de las carta de mi rivel en blanco
+
+Pero si no ocurre el else las transforma en negro
+
+Leyendo esto y haciendolo no me hizo sentido pero funciono, asi que no li di muchas vuelta a buscar la logica
 
 TipoCarta:
 es un simple enumerador para dividir los tipo de cartas
 
+Reset:
+Una vez se pierda o gane aparece el boton de reset para resetear la escena, tambien hace que el tiempo congelado se descongele
